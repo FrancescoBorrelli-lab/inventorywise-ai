@@ -38,7 +38,13 @@ class _ShellState extends State<_Shell> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(_titles[_index])),
-      body: _pages[_index],
+      // Larghezza limitata: su schermi larghi il contenuto resta leggibile.
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 720),
+          child: _pages[_index],
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
         onDestinationSelected: (i) => setState(() => _index = i),
