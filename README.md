@@ -2,7 +2,7 @@
 
 SaaS intelligente per la gestione del magazzino con Computer Vision e analisi predittiva.
 
-> 🚧 **Stato: in progettazione.** Questa repo contiene per ora solo la documentazione del progetto (problema, soluzione e stack previsto): il codice non è ancora stato scritto. Le sezioni qui sotto descrivono ciò che l'app farà, non ciò che è già implementato.
+> 🚧 **Stato: base funzionante, in sviluppo.** L'app si avvia e mostra magazzino, scansione e chat con **dati di esempio**. La scansione AI e la chat usano per ora un'implementazione simulata (`MockAiService`): le API OpenAI/Gemini e il backend Supabase **non sono ancora collegati**, e la fotocamera non è ancora integrata.
 
 ## Il Problema
 La gestione manuale dell'inventario è lenta e soggetta a errori umani. Le aziende piccole e medie faticano a prevedere le scorte necessarie e perdono tempo nel data entry.
@@ -20,10 +20,20 @@ InventoryWise AI automatizza il lavoro pesante:
 - **Local Database:** Hive / Isar
 - **Backend:** Supabase
 
-## Struttura prevista
-- `/lib/src/features/ai_engine`: Logica di comunicazione con le API di AI.
-- `/lib/src/features/inventory`: Logica di gestione del magazzino.
-- `/lib/src/services`: Integrazione Vision e Chat.
+## Struttura
+- `lib/src/features/inventory`: modello, repository (in memoria), provider Riverpod e schermate del magazzino.
+- `lib/src/features/ai_engine`: contratto `AiService` e implementazione simulata.
+- `lib/src/services`: previsione del riordino (`ReorderPredictor`), con test.
+
+## Come provarla
+
+```sh
+flutter pub get
+flutter run
+flutter test
+```
+
+Cosa funziona oggi: elenco articoli con giorni di scorta, suggerimenti di riordino (scorte < tempo di consegna + margine di sicurezza), scansione simulata di una bolla con conferma, chat che risponde a domande come "Quanti bulloni M8 abbiamo?" e "Cosa devo riordinare?".
 
 ## Obiettivo
 L'obiettivo è dimostrare competenze nell'integrazione di LLM/API di Intelligenza Artificiale in un contesto applicativo reale, focalizzandosi sull'ottimizzazione dei processi di business.
